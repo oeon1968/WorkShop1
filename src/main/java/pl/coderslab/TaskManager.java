@@ -16,20 +16,24 @@ public class TaskManager {
             action =showActions(listOfAction);
             switch (action.toUpperCase()){
                 case "ADD":
-                    addNewTask();
+                   // addNewTask();
                     break;
                 case "REMOVE":
-                    removeTask();
+                   // removeTask();
                     break;
                 case "LIST":
-                    showListOfTask();
+                     showListOfTask(listOfTask);
                 case "EXIT":
                     break;
+                default:
+                    System.out.println("Choose correct option, please.");
             }
         }
 
     }
     private static String[][] getTasks(File fileName){
+        // I check numbers of lines and numbers of field in file
+        //I return array of lines and fields
 
         try {
             int numberOfLine = 0;
@@ -49,19 +53,17 @@ public class TaskManager {
                     myLine = scFile.nextLine().split(",");
                     for (int j=0; j< myLine.length; j++){
                         myListOfTasks[i][j] = myLine[j];
+                        System.out.print("myListOfTask["+i+"]["+j+"] =");
+                        System.out.println(myLine[j]);
                     }
-
                 }
-
-
             }
-
+            return myListOfTasks;
         } catch (FileNotFoundException exFNF){
             System.out.println("File "+fileName+" not found!");
             exFNF.getStackTrace();
             return null;
         }
-        return myListOfTask;
     }
     private static String showActions(String[] listOfAction){
         Scanner chooseAction = new Scanner(System.in);
@@ -70,6 +72,15 @@ public class TaskManager {
             System.out.println(action);
         }
         return chooseAction.next();
+    }
+    private static void showListOfTask(String[][] vListOfTask){
+        System.out.println("Your tasks:");
+        for (String[] strings : vListOfTask) {
+            for (String string : strings) {
+                System.out.print(string + ", ");
+            }
+            System.out.println();
+        }
     }
 }
 
