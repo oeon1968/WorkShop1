@@ -1,9 +1,6 @@
 package pl.coderslab;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -130,9 +127,11 @@ public class TaskManager {
     private static void exit() throws IOException {
         if (myFile.canWrite()) {
             FileWriter vFile = new FileWriter(myFile);
+            PrintWriter vPrinter = new PrintWriter(vFile);
             for (int i = 0; i< listOfTasks.length; i++){
-                vFile.write(String.join(",",listOfTasks[i])+"\n");
+                vPrinter.println(String.join(",",listOfTasks[i]));
             }
+            vPrinter.close();
         }
         System.out.println(ConsoleColors.RED+"bye, bye, bye :)"+ConsoleColors.RESET);
     };
